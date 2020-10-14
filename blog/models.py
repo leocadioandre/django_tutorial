@@ -2,6 +2,13 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User #nosso usuário
 
+
+#Filtra os posts publicados
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super(PublishedManager, self).get_queryset()\
+                                            .filter(status='publicado')
+
 class Post(models.Model):
     STATUS = (
         ('rascunho','Rascunho'),
@@ -20,6 +27,8 @@ class Post(models.Model):
                                  choices=STATUS,
                                  default='rascunho')
     
+    published = PublishedManager()
+
 #alterar a ordem que é exibida as alterações - se remover o sinal de - volta a forma de antes
 
     class Meta:
