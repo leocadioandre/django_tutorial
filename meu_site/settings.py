@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'cv&6xqoorgo7p12%gsn-kegyty+i@1d5q6hbo84nhjrkr4d$1z'
 
-# SECURITY WARNING: don't run with debug turned on in production! -- Quando esta como False já esta em produção
+# SECURITY WARNING: don't run with debug turned on in production! -- Quando esta como False já esta em produção - deve se mudar para FALSE
 DEBUG = True
 
 ALLOWED_HOSTS = [] #define os dominios da aplicação
@@ -59,7 +59,7 @@ ROOT_URLCONF = 'meu_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,5 +123,17 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+
+#A pasta que ira conter fotos
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = '/media/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    'statics'
+]
+
 
 STATIC_URL = '/static/'

@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User #nosso usuário
+from django.urls import reverse
 
 
 #Filtra os posts publicados
@@ -27,7 +28,11 @@ class Post(models.Model):
                                  choices=STATUS,
                                  default='rascunho')
     
+    objects   = models.Manager() #agora alem de usar o pesonalizado user pode utilizar o objects (todos os posts)
     published = PublishedManager()
+
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[self.slug])
 
 #alterar a ordem que é exibida as alterações - se remover o sinal de - volta a forma de antes
 
