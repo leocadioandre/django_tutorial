@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User #nosso usuário
 
 class Post(models.Model):
     STATUS = (
@@ -11,8 +11,8 @@ class Post(models.Model):
     titulo = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250) #https://site.com/noticias/campeonato-brasileiro-2020/01/02/2020 - o slug é a partir do /campeonato ... 
     autor = models.ForeignKey(User, on_delete=models.CASCADE) #o cascade indica que ao excluir o user ele vai excluiur todos os posts do autor
-    
     conteudo = models.TextField()
+    
     publicado = models.DateTimeField(default=timezone.now)
     criado    = models.DateTimeField(auto_now_add=True) #oculto
     alterado  = models.DateTimeField(auto_now=True) #oculto
