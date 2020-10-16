@@ -1,8 +1,10 @@
 from django.db import models
+from django.dispatch import receiver
 from django.utils import timezone
 from django.contrib.auth.models import User #nosso usuário
 from django.urls import reverse
-
+from django.utils.text import slugify
+from django.db.models.signals import post_save
 
 #Filtra os posts publicados
 class PublishedManager(models.Manager):
@@ -32,7 +34,7 @@ class Post(models.Model):
     published = PublishedManager()
 
     def get_absolute_url(self):
-        return reverse('post_detail',args=[self.pk])
+        return reverse('post_detail',args=[self.slug])
 
     def get_absolute_url_update(self):
         return reverse('post_edit',args=[self.pk])
@@ -52,5 +54,14 @@ class Post(models.Model):
         return self.titulo
        #return '{} - {} '.format(self.titulo, self.slug)
 
+@receiver(post_save, sender=Post)
+def insert_slug(sender, instance, **kwargs):
+    if kwargs.get('created', False):
+        print('Criando slug')
+    if not instance.slug:
+        instance.slug = slugify(instance.titulo) #verifica se o slug nao existe se não existe ele adiciona automaticamente pelo slugify
+        return instance.save()
+
+#**kwargs = indica se deseja editar, criar, etc
 
 # Create your models here.
