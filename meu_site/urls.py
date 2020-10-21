@@ -19,8 +19,13 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+#Indica os caminhos dentro do site - django.auth.urls importa todas as urls necessarios como para login
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('contact/', include('contact.urls')),
+    path('about/', include('about.urls')),
     path('', include('blog.urls')), #quando não estiver passando nada na url, vai chamr por meio do include
 ]
 #Adicona um atalho, apenas para enquanto ocorre o desenovlimento para a abertura de imagens, deve ser retirado para o deploy

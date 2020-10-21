@@ -37,7 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog'
+    'bootstrapform',
+    'ckeditor',
+    'blog',
+    'accounts',
+    'social',
+    'contact',
+    'about'
 ]
 
 #modifica o objeto de solicitação tanto de request quanto response
@@ -67,6 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.processors.ctx_social',
             ],
         },
     },
@@ -120,6 +127,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGIN_REDIRECT_URL = 'home' #Irá logar e será redirecionado para o home
+
+LOGOUT_REDIRECT_URL = 'home'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
@@ -135,5 +145,13 @@ STATICFILES_DIRS = [
     'statics'
 ]
 
-
 STATIC_URL = '/static/'
+
+#ira apresentar uma mensagem caso ocorra tudo certo
+
+EMAIL_HOST = 'smtp.mailtrap.io' #gmail.com
+EMAIL_HOST_USER = 'a224a6ac2514fc' #andreleocadio@gmail.com
+EMAIL_HOST_PASSWORD = '73242ebdde6922' #senha
+EMAIL_PORT = '2525'
+
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

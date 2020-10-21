@@ -1,7 +1,15 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post, Category
 
 # Register your models here.
+
+@admin.register(Category) #a classe q irá gerenciar as aplicações
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('nome','criado','publicado')
+    list_filter = ('nome','criado','publicado')
+    date_hierarchy = 'publicado'
+    search_fields = ('nome',)
+
 
 #Configura o painel admin do django com o app
 
@@ -11,12 +19,16 @@ from .models import Post
 class PostAdmin(admin.ModelAdmin):
     list_display = ('titulo','autor','publicado','status')
     list_filter = ('status', 'criado', 'publicado','autor')
+    readonly_fields = ('visualizar_imagem',)
     raw_id_fields = ('autor',)
     date_hierarchy = 'publicado'
     search_fields = ('titulo', 'conteudo')
     prepopulated_fields = {'slug':('titulo',)} #ele vai se basear no titulo para indicar o slug de forma automatica
     
-    
+    def visualizar_imagem(self,obj):
+        return obj.view_image
+    visualizar_imagem.short_description = "Imagem Cadastrada"
+
     
 """
 titulo = models.CharField(max_length=250)
