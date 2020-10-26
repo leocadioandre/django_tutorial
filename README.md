@@ -1,4 +1,4 @@
-# Construindo um Blog utilizandpo o Django
+# Construindo um Blog utilizando o Django
 
 - Projeto desenvolvido com o objetivo de estudar o desenvolvimento web com o Framework Django.
 - Ajudar no desenvolviento de futuros de deploys de apps com o objetivo de divulgar projetos de Ciências de Dados.
